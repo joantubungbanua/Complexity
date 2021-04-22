@@ -88,6 +88,10 @@ function traverseWithParents(object, visitor) {
 }
 
 
+
+
+
+
 // helper function to count logical expressions + && + ||
 
 function decisionCounter(node) {
@@ -114,16 +118,21 @@ function complexity(filePath) {
 	var buf = fs.readFileSync(filePath, "utf8");
 	var ast = esprima.parse(buf, options);
 
-	//counts string
-	var stringCount = (JSON.stringify(ast).match(/Literal/g) || []).length;
-	//fileBuilder.Strings = stringCount;
+
 
 	// A file level-builder:
 	var fileBuilder = new FileBuilder();
 	fileBuilder.FileName = filePath;
 	fileBuilder.ImportCount = 0;
 	builders[filePath] = fileBuilder;
-	fileBuilder.Strings = stringCount;
+
+		//counts string
+		var stringCount = (JSON.stringify(ast).match(/Literal/g) || []).length;
+		fileBuilder.Strings = stringCount;
+		exports.getStrings = () => fileBuilder.Strings
+	
+	
+	
 
 	// Tranverse program with a function visitor.
 	traverseWithParents(ast, function (node) {
