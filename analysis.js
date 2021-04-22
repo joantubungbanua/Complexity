@@ -126,10 +126,10 @@ function complexity(filePath) {
 	fileBuilder.ImportCount = 0;
 	builders[filePath] = fileBuilder;
 
-		//counts string
-		var stringCount = (JSON.stringify(ast).match(/Literal/g) || []).length;
-		fileBuilder.Strings = stringCount;
-		exports.getStrings = () => fileBuilder.Strings
+	//counts string
+	var stringCount = (JSON.stringify(ast).match(/Literal/g) || []).length;
+	fileBuilder.Strings = stringCount;
+	exports.getStrings = () => fileBuilder.Strings
 	
 	
 	
